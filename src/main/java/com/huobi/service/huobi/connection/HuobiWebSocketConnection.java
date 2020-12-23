@@ -282,6 +282,7 @@ public class HuobiWebSocketConnection extends WebSocketListener implements WebSo
   }
 
   private void onError(String errorMessage, Throwable e) {
+    log.error("[Connection error][" + this.getId() + "] " + errorMessage);
     closeOnError();
   }
 
