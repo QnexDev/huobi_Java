@@ -42,11 +42,11 @@ public class HuobiWebSocketConnection extends WebSocketListener implements WebSo
 
   private long lastReceivedTime;
 
-  private WebSocket webSocket;
+  private volatile WebSocket webSocket;
 
   private Request okhttpRequest;
 
-  private ConnectionStateEnum state;
+  private volatile ConnectionStateEnum state;
 
   private Long id;
 
@@ -332,7 +332,7 @@ public class HuobiWebSocketConnection extends WebSocketListener implements WebSo
   }
 
   public void close() {
-    log.error("[Connection close][" + this.getId() + "] Closing normally");
+    log.info("[Connection close][" + this.getId() + "] Closing normally");
     webSocket.cancel();
     webSocket = null;
     WebSocketWatchDog.onClosedNormally(this);
